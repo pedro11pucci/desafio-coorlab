@@ -1,24 +1,31 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Sidebar from './components/Sidebar.vue'
+import Calculator from './components/Calculator.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <Sidebar />
+        <div class="content">
+            <Calculator />
+        </div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
 <style scoped>
-    template {
-        background-color: rgb(0, 0, 0);
-    }
+
+.wrapper{
+    background-color: #fefefe;
+    display: flex;
+}
+
+.content {
+    background-color: #f7f7f7;
+    margin-top: 6%;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    position: static;
+}
+
 </style>
