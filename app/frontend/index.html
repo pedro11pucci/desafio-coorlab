@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Vite App</title>
-  </head>
-  <body>
+</head>
+<body>
     <div id="home"></div>
     <script type="module" src="/src/main.js"></script>
-  </body>
+    <script src="https://unpkg.com/vue@latest"></script>
+    <script src="https://unpkg.com/@vuepic/vue-datepicker@latest"></script>
+    <script>
+        const app = Vue.createApp({
+            components: { VueDatePicker },
+        }).mount("#app");
+    </script>
+</body>
 </html>

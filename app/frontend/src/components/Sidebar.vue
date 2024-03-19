@@ -18,7 +18,7 @@ import SidebarItem from './SidebarItem.vue'
 .sidebar{
     background-color: #292f3f;
     height: 100vh;
-    flex: 1;
+    width: 22%;
     position: static;
 
     .items{

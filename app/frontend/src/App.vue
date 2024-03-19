@@ -19,6 +19,6 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <style scoped>
     template {
-        background-color: wheat;
+        background-color: rgb(0, 0, 0);
     }
 </style>

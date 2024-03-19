@@ -1,12 +1,13 @@
 <script setup>
 import Sidebar from './components/Sidebar.vue'
+import Calculator from './components/Calculator.vue'
 </script>
 
 <template>
     <div class="wrapper">
         <Sidebar />
         <div class="content">
-            
+            <Calculator />
         </div>
     </div>
 </template>
@@ -24,7 +25,6 @@ import Sidebar from './components/Sidebar.vue'
     border-top: 1px solid #ccc;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     width: 100vw;
-    flex: 5;
     position: static;
 }
 
