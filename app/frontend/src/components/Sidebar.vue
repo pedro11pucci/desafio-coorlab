@@ -6,7 +6,7 @@ import SidebarItem from './SidebarItem.vue'
     <div class="sidebar">
         <img alt="CB logo" class="logo" src="../assets/logo.png" />
         <div class="items">
-            <SidebarItem>
+            <SidebarItem url="calculadora">
                 <template #heading>Calculadora de Viagem</template>
             </SidebarItem>
         </div>

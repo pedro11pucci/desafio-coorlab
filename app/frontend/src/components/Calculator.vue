@@ -1,16 +1,12 @@
 <script setup>
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import CalculatorForm from './CalculatorForm.vue'
 import { ref } from 'vue';
 
-const date = ref(new Date());
-const format = (date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
+const showTripResult = ref(false);
 
-  return `${day}/${month}/${year}`;
-}
+const calculateTrip = () => {
+    showTripResult.value = true;
+};
 </script>
 
 <template>
@@ -20,32 +16,11 @@ const format = (date) => {
         </div>
         <div class="calculator-main">
             <div class="calculator-form">
-                <form>
-                    <h2>Calcule o Valor da Viagem</h2>
-                    <div class="input-wrapper">
-                        <span>Destino</span><br>
-                        <select class="destiny-select" placeholder="Selecione o destino">
-                            <option value="" disabled selected hidden>Selecione o destino</option>
-                            <option value="campinas">Campinas</option>
-                            <option value="sao-paulo">São Paulo</option>
-                            <option value="santo-andre">Santo André</option>
-                        </select><br>
-                    </div>
-                    <div class="input-wrapper">
-                        <span>Data</span><br>
-                        <VueDatePicker class="date-picker" v-model="date"
-                         :enable-time-picker="false"
-                         :format="format" 
-                         locale="br" 
-                         select-text="Selecionar"
-                         cancel-text="Fechar"
-                         placeholder="Selecione uma data" /><br>
-                    </div>
-                    <input class="btn-submit" type="submit" value="Buscar" />
-                </form>
+                <CalculatorForm :format="format" @search="calculateTrip"/>
             </div>
             <div class="calculator-results">
-                
+                <h2 class="no-result" v-if="!showTripResult">Nenhum dado selecionado.</h2>
+                <h2 class="no-result" v-if="showTripResult">Resultados.</h2>
             </div>
         </div>
     </div>
@@ -75,56 +50,12 @@ const format = (date) => {
         background-color: #fefefe;
         padding-bottom: 2%;
 
-        .calculator-form{
-            margin-left: 2%;
-            margin-top: 2.5%;
-            padding-top: 8%;
-            border-radius: 10px;
-            width: 21vw;
-            height: 27vw;
-            background-color: #f2f2f2;
+        .calculator-results{
+            width: 39vw;
 
-            form {
-                margin-left: 8%;
-
-                h2 {
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin-left: 4%;
-                }
-
-                .input-wrapper{
-                    margin-top: 6%;
-
-                    select {
-                        width: 90%;
-                        font-size: 16px;
-                        height: 4vh;
-                        border-radius: 5px;
-                        border-color: #ddd;
-                        background-color: #fff;
-                        color: #212121;
-                    }
-
-                    span{
-                        font-size: 14px;
-                    }
-
-                    .date-picker{
-                        width: 90%;
-                        margin-top: 2%;
-                    }
-                }
-            }
-
-            .btn-submit{
-                background-color: #00a8b3;
-                width: 15vh;
-                height: 1.7vw;
-                margin-top: 6%;
-                margin-left: 24%;
-                border-radius: 6px;
-                border-color: #75d6dd;
+            .no-result{
+                margin-top: 33%;
+                margin-left: 33.5%;
             }
         }
     }
