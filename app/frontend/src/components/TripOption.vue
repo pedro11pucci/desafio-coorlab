@@ -6,14 +6,23 @@
                     
                 </div>
                 <div class="informations">
-                    <p class="company-label">Nome da Empresa</p>
-                    <p class="seat">Assento: </p>
-                    <p class="duration">Tempo estimado: </p>
+                    <p class="company-label">
+                        <slot name="company-label"></slot>
+                    </p>
+                    <p class="seat">
+                        <slot name="seat"></slot> 
+                    </p>
+                    <p class="duration">
+                        Tempo estimado: 
+                        <slot name="duration"></slot>
+                    </p>
                 </div>
             </div>
             <div class="price">
                 <p class="price-label">Preço</p>
-                <p class="price-value">R$ 1.250,00</p>
+                <p class="price-value">
+                    <slot name="price"></slot>
+                </p>
             </div>
         </div>
     </div>

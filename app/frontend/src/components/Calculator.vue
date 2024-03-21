@@ -1,12 +1,17 @@
 <script setup>
 import CalculatorForm from './CalculatorForm.vue'
 import TripOption from './TripOption.vue'
+import axios from 'axios';
 import { ref } from 'vue';
 
-const showTripResult = ref(false);
+const tripResult = ref(null);
 
-const calculateTrip = () => {
-    showTripResult.value = true;
+const calculateTrip = (data) => {
+    axios.get(`http://localhost:3000/${data.destiny}`).then((response) => {
+        data = response.data
+        tripResult.value = null
+        tripResult.value = data
+    })
 };
 </script>
 
@@ -17,15 +22,24 @@ const calculateTrip = () => {
         </div>
         <div class="calculator-main">
             <div class="calculator-form">
-                <CalculatorForm :format="format" @search="calculateTrip"/>
+                <CalculatorForm :format="format" @search="calculateTrip" />
             </div>
             <div class="calculator-results">
-                <h2 class="no-result" v-if="!showTripResult">Nenhum dado selecionado.</h2>
-                <div class="results" v-if="showTripResult">
+                <h2 class="no-result" v-if="!tripResult">Nenhum dado selecionado.</h2>
+                <div class="results" v-if="tripResult">
                     <h2 class="result">Estas são as melhores alternativas de viagem <br> para a data selecionada</h2>
-                    <TripOption />
-                    <TripOption />
-                    
+                    <TripOption>
+                        <template #company-label>{{tripResult.comfort.name}}</template>
+                        <template #duration>{{tripResult.comfort.duration}}</template>
+                        <template #seat>Leito: {{tripResult.comfort.seat}} (Completo)</template>
+                        <template #price>{{tripResult.comfort.price_confort}}</template>
+                    </TripOption>
+                    <TripOption>
+                        <template #company-label>{{tripResult.econ.name}}</template>
+                        <template #duration>{{tripResult.econ.duration}}</template>
+                        <template #seat>Assento: {{tripResult.econ.seat}} (convencional)</template>
+                        <template #price>{{tripResult.econ.price_econ}}</template>
+                    </TripOption>
                 </div>
             </div>
         </div>
@@ -33,19 +47,19 @@ const calculateTrip = () => {
 </template>
 
 <style scoped>
-.calculator-wrapper{
+.calculator-wrapper {
     width: 70%;
     margin-top: 6%;
     margin-left: 11.4%;
-    
-    .calculator-header{
+
+    .calculator-header {
         background-color: #292f3f;
         color: #f3f6fb;
         height: 6.4vh;
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
-        
-        h1{
+
+        h1 {
             margin-left: 5%;
             padding-top: 0.8%;
             font-size: 25px;
@@ -53,23 +67,23 @@ const calculateTrip = () => {
         }
     }
 
-    .calculator-main{
+    .calculator-main {
         display: flex;
         background-color: #fefefe;
         padding-bottom: 2%;
         border-bottom-left-radius: 7px;
         border-bottom-right-radius: 7px;
 
-        .calculator-results{
+        .calculator-results {
             width: 39vw;
             margin-left: 4%;
 
-            .no-result{
+            .no-result {
                 margin-top: 37%;
                 margin-left: 31%;
             }
 
-            .result{
+            .result {
                 margin-top: 15%;
             }
         }

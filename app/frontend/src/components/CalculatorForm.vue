@@ -13,9 +13,14 @@ const format = (date) => {
   return `${day}/${month}/${year}`;
 }
 
+const formData = ref({
+    destiny: '',
+    date: ''
+})
+
 const emits = defineEmits(['search'])
-const onCalculate = () => {
-    emits('search');
+const handleSubmit = () => {
+    emits('search', formData.value);
 }
 
 </script>
@@ -43,17 +48,17 @@ export default {
 
 <template>
     <div class="calculator-form">
-        <form @submit.prevent="calculateTrip">
+        <form @submit.prevent="handleSubmit">
             <h2>Calcule o Valor da Viagem</h2>
             <div class="input-wrapper">
             <span>Destino</span><br>
-            <select class="destiny-select" v-model="selectedOption">
+            <select class="destiny-select" v-model="formData.destiny">
                 <option v-for="option in options" :value="option">{{  option  }}</option>
             </select><br>
             </div>
             <div class="input-wrapper">
                 <span>Data</span><br>
-                <VueDatePicker class="date-picker" v-model="date"
+                <VueDatePicker class="date-picker" v-model="formData.date"
                 :enable-time-picker="false"
                 :format="format" 
                 locale="br" 
@@ -61,7 +66,7 @@ export default {
                 cancel-text="Fechar"
                 placeholder="Selecione uma data" /><br>
             </div>
-            <input class="btn-submit" type="submit" value="Buscar" @click="onCalculate" />
+            <input class="btn-submit" type="submit" value="Buscar" />
         </form>
     </div>
 </template>

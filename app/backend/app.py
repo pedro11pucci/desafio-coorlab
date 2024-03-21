@@ -20,5 +20,27 @@ def fetch():
 
     return jsonify(sorted((list(cities))))
 
+@app.route('/<string:destiny>')
+def searchTrip(destiny):
+    with open('../data.json') as file:
+        data = json.load(file)
+    transports = data['transport']
+
+    filtered_transports = []
+    
+    for transport in transports:
+        if transport['city'] == destiny:
+            filtered_transports.append(transport)
+
+    comfort = max(filtered_transports, key=lambda x: float(x["price_confort"].replace("R$ ", "").replace(",", ".")))
+    econ = min(filtered_transports, key=lambda x: float(x["price_econ"].replace("R$ ", "").replace(",", ".")))
+
+    results = {
+        "comfort": comfort, 
+        "econ": econ
+    }
+
+    return results
+
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
