@@ -42,6 +42,8 @@ const calculateTrip = () => {
         background-color: #292f3f;
         color: #f3f6fb;
         height: 6.4vh;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
         
         h1{
             margin-left: 5%;
@@ -55,6 +57,8 @@ const calculateTrip = () => {
         display: flex;
         background-color: #fefefe;
         padding-bottom: 2%;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
 
         .calculator-results{
             width: 39vw;
