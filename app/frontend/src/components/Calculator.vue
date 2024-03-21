@@ -1,5 +1,6 @@
 <script setup>
 import CalculatorForm from './CalculatorForm.vue'
+import TripOption from './TripOption.vue'
 import { ref } from 'vue';
 
 const showTripResult = ref(false);
@@ -20,7 +21,12 @@ const calculateTrip = () => {
             </div>
             <div class="calculator-results">
                 <h2 class="no-result" v-if="!showTripResult">Nenhum dado selecionado.</h2>
-                <h2 class="no-result" v-if="showTripResult">Resultados.</h2>
+                <div class="results" v-if="showTripResult">
+                    <h2 class="result">Estas são as melhores alternativas de viagem <br> para a data selecionada</h2>
+                    <TripOption />
+                    <TripOption />
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -52,10 +58,15 @@ const calculateTrip = () => {
 
         .calculator-results{
             width: 39vw;
+            margin-left: 4%;
 
             .no-result{
-                margin-top: 33%;
-                margin-left: 33.5%;
+                margin-top: 37%;
+                margin-left: 31%;
+            }
+
+            .result{
+                margin-top: 15%;
             }
         }
     }

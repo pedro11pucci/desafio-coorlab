@@ -17,6 +17,28 @@ const emits = defineEmits(['search'])
 const onCalculate = () => {
     emits('search');
 }
+
+</script>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      options: []
+    };
+  },
+  created() {
+    axios.get('http://localhost:3000/fetch')
+      .then(response => {
+        this.options = response.data;
+      })
+      .catch(error => {
+        console.error('Erro ao buscar dados:', error);
+      });
+  }
+};
 </script>
 
 <template>
@@ -25,11 +47,8 @@ const onCalculate = () => {
             <h2>Calcule o Valor da Viagem</h2>
             <div class="input-wrapper">
             <span>Destino</span><br>
-            <select class="destiny-select" placeholder="Selecione o destino">
-                <option value="" disabled selected hidden>Selecione o destino</option>
-                <option value="campinas">Campinas</option>
-                <option value="sao-paulo">São Paulo</option>
-                <option value="santo-andre">Santo André</option>
+            <select class="destiny-select" v-model="selectedOption">
+                <option v-for="option in options" :value="option">{{  option  }}</option>
             </select><br>
             </div>
             <div class="input-wrapper">
