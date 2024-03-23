@@ -1,16 +1,17 @@
 <script setup>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import Modal from './Modal.vue'
 import { ref } from 'vue';
 
 const date = ref(new Date());
 const props = defineProps(['format']);
 const format = (date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
-  return `${day}/${month}/${year}`;
+    return `${day}/${month}/${year}`;
 }
 
 const formData = ref({
@@ -18,8 +19,13 @@ const formData = ref({
     date: ''
 })
 
+const modalRef = ref()
 const emits = defineEmits(['search'])
 const handleSubmit = () => {
+    if(!formData.value.destiny || !formData.value.date){
+        modalRef.value.openCloseFun()
+        return
+    }
     emits('search', formData.value);
 }
 
@@ -27,22 +33,26 @@ const handleSubmit = () => {
 
 <script>
 import axios from 'axios';
+import Modal from './Modal.vue'
 
 export default {
-  data() {
-    return {
-      options: []
-    };
-  },
-  created() {
-    axios.get('http://localhost:3000/fetch')
-      .then(response => {
-        this.options = response.data;
-      })
-      .catch(error => {
-        console.error('Erro ao buscar dados:', error);
-      });
-  }
+    data () {
+        return {
+            options: []
+        };
+    },
+    created () {
+        axios.get('http://localhost:3000/fetch')
+            .then(response => {
+                this.options = response.data;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados:', error);
+            });
+    },
+    components: {
+        Modal
+    }
 };
 </script>
 
@@ -51,28 +61,24 @@ export default {
         <form @submit.prevent="handleSubmit">
             <h2>Calcule o Valor da Viagem</h2>
             <div class="input-wrapper">
-            <span>Destino</span><br>
-            <select class="destiny-select" v-model="formData.destiny">
-                <option v-for="option in options" :value="option">{{  option  }}</option>
-            </select><br>
+                <span>Destino</span><br>
+                <select class="destiny-select" v-model="formData.destiny">
+                    <option v-for="option in options" :value="option">{{ option }}</option>
+                </select><br>
             </div>
             <div class="input-wrapper">
                 <span>Data</span><br>
-                <VueDatePicker class="date-picker" v-model="formData.date"
-                :enable-time-picker="false"
-                :format="format" 
-                locale="br" 
-                select-text="Selecionar"
-                cancel-text="Fechar"
-                placeholder="Selecione uma data" /><br>
+                <VueDatePicker class="date-picker" v-model="formData.date" :enable-time-picker="false" :format="format"
+                    locale="br" select-text="Selecionar" cancel-text="Fechar" placeholder="Selecione uma data" /><br>
             </div>
             <input class="btn-submit" type="submit" value="Buscar" />
         </form>
     </div>
+    <Modal ref="modalRef" :visible="false">Insira os valores para realizar<br> a cotação.</Modal>
 </template>
 
 <style scoped>
-.calculator-form{
+.calculator-form {
     margin-left: 5%;
     margin-top: 5%;
     padding-top: 22%;
@@ -90,7 +96,7 @@ export default {
             margin-left: 4%;
         }
 
-        .input-wrapper{
+        .input-wrapper {
             margin-top: 6%;
 
             select {
@@ -103,18 +109,18 @@ export default {
                 color: #212121;
             }
 
-            span{
+            span {
                 font-size: 14px;
             }
 
-            .date-picker{
+            .date-picker {
                 width: 90%;
                 margin-top: 2%;
             }
         }
     }
 
-    .btn-submit{
+    .btn-submit {
         background-color: #00a8b3;
         width: 17vh;
         height: 1.7vw;
@@ -124,7 +130,7 @@ export default {
         border-color: #75d6dd;
     }
 
-    .btn-submit:hover{
+    .btn-submit:hover {
         background-color: #09dae9;
         transition: 0.3s;
     }

@@ -1,8 +1,8 @@
 <script>
 export default {
-  props: {
-    url: String
-  }
+    props: {
+        url: String
+    }
 };
 </script>
 <template>
@@ -16,12 +16,14 @@ export default {
 </template>
 
 <style scoped>
-h2{
+h2 {
     margin-left: 10%;
     color: #c6cbd1;
 }
-h2:hover{
+
+h2:hover {
     color: #01a7b3;
     transition: 0.2s;
+    text-decoration: none;
 }
 </style>

@@ -64,7 +64,6 @@
                 }
                 
                 .duration{
-                    margin-bottom: 5%;
                     font-size: 17px;
                 }
             }
