@@ -22,10 +22,11 @@ const formData = ref({
 const modalRef = ref()
 const emits = defineEmits(['search'])
 const handleSubmit = () => {
-    if(!formData.value.destiny || !formData.value.date){
+    if (!formData.value.destiny || !formData.value.date) {
         modalRef.value.openCloseFun()
         return
     }
+    console.log(formData.value.destiny);
     emits('search', formData.value);
 }
 
@@ -40,7 +41,8 @@ import 'vue-material-design-icons/styles.css';
 export default {
     data () {
         return {
-            options: []
+            options: [],
+            placeholder: "Insira"
         };
     },
     created () {
@@ -62,12 +64,11 @@ export default {
 <template>
     <div class="calculator-form">
         <form @submit.prevent="handleSubmit">
-            <h2><hand-coin-icon style="font-size: 30px;"/> Calcule o Valor da Viagem</h2>
+            <h2><hand-coin-icon style="font-size: 30px;" /> Calcule o Valor da Viagem</h2>
             <div class="input-wrapper">
                 <span>Destino</span><br>
-                <select class="destiny-select" v-model="formData.destiny">
-                    <option v-for="option in options" :value="option">{{ option }}</option>
-                </select><br>
+                <v-select class="destiny-select" label="city" placeholder="Selecione o destino" :options="options"
+                    v-model="formData.destiny"></v-select>
             </div>
             <div class="input-wrapper">
                 <span>Data</span><br>
@@ -102,12 +103,11 @@ export default {
         .input-wrapper {
             margin-top: 6%;
 
-            select {
+            .destiny-select {
                 width: 90%;
                 font-size: 16px;
                 height: 4vh;
                 border-radius: 5px;
-                border-color: #ddd;
                 background-color: #fff;
                 color: #212121;
             }
