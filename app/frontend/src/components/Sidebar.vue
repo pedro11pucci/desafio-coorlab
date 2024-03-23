@@ -1,13 +1,21 @@
 <script setup>
 import SidebarItem from './SidebarItem.vue'
 </script>
+<script>
+import CalculatorIcon from 'vue-material-design-icons/CalculatorVariantOutline.vue';
+import 'vue-material-design-icons/styles.css';
+
+components: {
+  CalculatorIcon;
+}
+</script>
 
 <template>
     <div class="sidebar">
         <img alt="CB logo" class="logo" src="../assets/logo.png" />
         <div class="items">
             <SidebarItem url="calculadora">
-                <template #heading>Calculadora de Viagem</template>
+                <template #heading><calculator-icon/> Calculadora de Viagem</template>
             </SidebarItem>
         </div>
 
@@ -21,8 +29,13 @@ import SidebarItem from './SidebarItem.vue'
     width: 22%;
     position: static;
 
+    a{
+        text-decoration: none
+    }
+
     .items{
         margin-top: 13%;
+        margin-right: 10%;
     }
 
     img{

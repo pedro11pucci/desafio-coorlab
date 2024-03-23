@@ -3,7 +3,9 @@
         <div class="company">
             <div class="left-wrapper">
                 <div class="icon">
-                    
+                    <h1>
+                        <slot name="icon"></slot>
+                    </h1>
                 </div>
                 <div class="informations">
                     <p class="company-label">
@@ -44,6 +46,13 @@
                 width: 17%;
                 border-top-left-radius: 10px;
                 border-bottom-left-radius: 10px;
+
+                h1{
+                    font-size: 50px;
+                    color: white;
+                    text-align: center;
+                    margin-top: 13%;
+                }
             }
             
             .informations{

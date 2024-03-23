@@ -13,8 +13,8 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.11.3",
-    "oh-vue-icons": "^1.0.0-rc3",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-material-design-icons": "^5.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

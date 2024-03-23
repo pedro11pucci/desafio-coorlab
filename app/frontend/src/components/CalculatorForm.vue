@@ -34,6 +34,8 @@ const handleSubmit = () => {
 <script>
 import axios from 'axios';
 import Modal from './Modal.vue'
+import HandCoinIcon from 'vue-material-design-icons/HandCoinOutline.vue';
+import 'vue-material-design-icons/styles.css';
 
 export default {
     data () {
@@ -51,7 +53,8 @@ export default {
             });
     },
     components: {
-        Modal
+        Modal,
+        HandCoinIcon
     }
 };
 </script>
@@ -59,7 +62,7 @@ export default {
 <template>
     <div class="calculator-form">
         <form @submit.prevent="handleSubmit">
-            <h2>Calcule o Valor da Viagem</h2>
+            <h2><hand-coin-icon style="font-size: 30px;"/> Calcule o Valor da Viagem</h2>
             <div class="input-wrapper">
                 <span>Destino</span><br>
                 <select class="destiny-select" v-model="formData.destiny">
@@ -91,9 +94,9 @@ export default {
         margin-left: 8%;
 
         h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
-            margin-left: 4%;
+            margin-left: 6%;
         }
 
         .input-wrapper {

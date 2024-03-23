@@ -1,4 +1,7 @@
 <script>
+import TruckDeliveryIcon from 'vue-material-design-icons/AlertBoxOutline.vue';
+import 'vue-material-design-icons/styles.css';
+
 export default {
     name: 'Modal',
     props: {
@@ -19,16 +22,21 @@ export default {
             this.openClose = newVal
             console.log('new ' + newVal + '==' + oldVal)
         }
+    },
+    components: {
+        TruckDeliveryIcon
     }
 }
 
 </script>
+
 <template>
     <div v-if="openClose" class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
+                    <h1 class="icon"><truck-delivery-icon/></h1>
                     <h1><slot></slot></h1>
                 </div>
                 <button type="button" class="btn" @click="openCloseFun()">Fechar</button>
@@ -45,9 +53,15 @@ export default {
 
 .modal {
     display: block;
-    padding-top: 21%;
+    padding-top: 18%;
     padding-left: 10%;
     background-color: rgba(0, 0, 0, 0.2);
+
+    .icon{
+        color: #336480;
+        font-size: 70px; 
+        margin-top: 6%;
+    }
 
     h1{
         font-size: 24px;

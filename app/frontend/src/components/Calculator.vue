@@ -14,11 +14,23 @@ const calculateTrip = (data) => {
     })
 };
 </script>
+<script>
+import TruckDeliveryIcon from 'vue-material-design-icons/TruckDeliveryOutline.vue';
+import HandCoinIcon from 'vue-material-design-icons/HandCoinOutline.vue';
+import ClockCheckOutlineIcon from 'vue-material-design-icons/ClockCheckOutline.vue';
+import 'vue-material-design-icons/styles.css';
+
+components: {
+  TruckDeliveryIcon;
+  HandCoinIcon;
+  ClockCheckOutlineIcon
+}
+</script>
 
 <template>
     <div class="calculator-wrapper">
         <div class="calculator-header">
-            <h1>Calculadora de Viagem</h1>
+            <h1><truck-delivery-icon style="font-size: 28px;"/> Calculadora de Viagem</h1>
         </div>
         <div class="calculator-main">
             <div class="calculator-form">
@@ -29,12 +41,14 @@ const calculateTrip = (data) => {
                 <div class="results" v-if="tripResult">
                     <h2 class="result">Estas são as melhores alternativas de viagem <br> para a data selecionada</h2>
                     <TripOption>
+                        <template #icon><hand-coin-icon/></template>
                         <template #company-label>{{tripResult.comfort.name}}</template>
                         <template #duration>{{tripResult.comfort.duration}}</template>
                         <template #seat>Leito: {{tripResult.comfort.seat}} (Completo)</template>
                         <template #price>{{tripResult.comfort.price_confort}}</template>
                     </TripOption>
                     <TripOption>
+                        <template #icon><clock-check-outline-icon/></template>
                         <template #company-label>{{tripResult.econ.name}}</template>
                         <template #duration>{{tripResult.econ.duration}}</template>
                         <template #seat>Assento: {{tripResult.econ.seat}} (convencional)</template>
@@ -60,9 +74,9 @@ const calculateTrip = (data) => {
         border-top-right-radius: 7px;
 
         h1 {
-            margin-left: 5%;
-            padding-top: 0.8%;
-            font-size: 25px;
+            margin-left: 3.5%;
+            padding-top: .8%;
+            font-size: 23px;
             color: #f7faff;
         }
     }
