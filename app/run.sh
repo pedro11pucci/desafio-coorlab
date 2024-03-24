@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "Implemente aqui o script para executar a sua solução"
 cd frontend
 npm install
 npm run dev &
